@@ -1,43 +1,33 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
+
+import Taskbar from "../../components/Taskbar";
+import AppsTaskbar from "../../components/AppsTaskbar";
 
 import backgroundDesktopImage from "../../../../shared/assets/background-desktop.jpg";
+import iconVacinometro from "../../../../shared/assets/icon-vacinometro.png";
 
-import {
-  Container,
-  Taskbar,
-  ButtonHideTaskbar,
-  ContainerUnhideTaskbar,
-} from "./styles";
+import { Container } from "./styles";
 
 const Home: React.FC = () => {
-  const [isHideTaskbar, setIsHideTaskbar] = useState(false);
-  const [isHideTaskbarAnimation, setIsHideTaskbarAnimation] = useState(false);
-
-  const handleHideTaskbar = useCallback(() => {
-    if (isHideTaskbar) {
-      setIsHideTaskbar(!isHideTaskbar);
-
-      setIsHideTaskbarAnimation(!isHideTaskbarAnimation);
-    } else {
-      setIsHideTaskbarAnimation(!isHideTaskbarAnimation);
-
-      setTimeout(() => {
-        setIsHideTaskbar(!isHideTaskbar);
-      }, 1000);
-    }
-  }, [isHideTaskbar, isHideTaskbarAnimation]);
-
   return (
     <Container src={backgroundDesktopImage}>
-      {!isHideTaskbar && (
-        <Taskbar isHide={isHideTaskbarAnimation}>
-          <ButtonHideTaskbar onClick={handleHideTaskbar} />
-        </Taskbar>
-      )}
+      <Taskbar>
+        <AppsTaskbar
+          onclick={() => {}}
+          backgroundColor="#b40000"
+          src={iconVacinometro}
+          widthImage="30"
+          heightImage="30"
+        />
 
-      {isHideTaskbar && (
-        <ContainerUnhideTaskbar onMouseEnter={handleHideTaskbar} />
-      )}
+        <AppsTaskbar
+          onclick={() => {}}
+          backgroundColor="#fff"
+          src={backgroundDesktopImage}
+          widthImage="30"
+          heightImage="30"
+        />
+      </Taskbar>
     </Container>
   );
 };
